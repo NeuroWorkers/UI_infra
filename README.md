@@ -1,80 +1,89 @@
 # UI_infra
 
-Для запуска необходимо:<br>
-1) Установить недостающие модули в файле flask_ui.pu.<br>
-2) Запустить этот файл, который в консоль запишет логи, с ссылкой такого вида: http://127.0.0.1:5000.<br>
-3) Кликнуть ссылку - будет редирект на дефолтный браузер с рендером страницы.<br>
+## Requirements
 
-Верстка - templates/index.html , static/index.css<br>
-Функционал - static/index.js<br>
-Localhost-server - flask_ui.py<br>
+To start the project, follow these steps:
 
-Для расширения возможностей использования рекомендуется поставить сервер, например на nginx - возможность доступа по внешнему IP. 
+1. Install the missing modules listed in `flask_ui.py`.
+2. Run `flask_ui.py`. It will log to the console and provide a link like `http://127.0.0.1:5000`.
+3. Click the link to be redirected to the default browser with the rendered page.
 
-# GUIDE FOR MAC 
+- **HTML and CSS**: `templates/index.html`, `static/index.css`
+- **JavaScript**: `static/index.js`
+- **Localhost server**: `flask_ui.py`
 
-1) brew update
+For extended functionality, it is recommended to set up a server, such as nginx, to allow access via an external IP.
 
-2) brew apt install nginx
+## Guide for macOS
 
-3) brew services start nginx
+1. Update Homebrew:
+    ```sh
+    brew update
+    ```
 
-4) brew services stop nginx
+2. Install nginx:
+    ```sh
+    brew install nginx
+    ```
 
-5) sudo nano /opt/homebrew/etc/nginx/sites-enabled/YOUR_NAMING.conf
+3. Start nginx:
+    ```sh
+    brew services start nginx
+    ```
 
-6) Содержимое *.conf:<br>
-server <br>
-{<br>
-   listen 80; # Выберите сами<br>
-   
-   server_name localhost; # Выберите сами<br>
-   
-   root /absolute_path_to_project;<br>
+4. Stop nginx:
+    ```sh
+    brew services stop nginx
+    ```
 
-   // Доступ к файлам статики (HTML, CSS, JS)<br>
-   location /static/ {<br>
-       alias /absolute_path_to_static/;<br>
-   }<br>
+5. Edit the sample configuration file:
+    ```sh
+    sudo cp sample.conf /opt/homebrew/etc/nginx/sites-enabled/sample.conf
+    ```
 
-   location / {<br>
-       proxy_pass http://127.0.0.1:5000; # Выберите сами<br>
-       proxy_set_header Host $host;<br>
-       proxy_set_header X-Real-IP $remote_addr;<br>
-       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>
-   }<br>
-}<br>
 
-# ATTENTION 
-В случае некорректности указанного пути (как правило это отсутствие /sites-enabled), следует: 
-1) Ручками создать директорию 
-2) В ней от root создавать *.conf 
+## Attention
 
-Пункт 2 выполнять придется в любом случае, делать это от root. 
+If the specified path is incorrect (usually due to the absence of `/sites-enabled`), follow these steps:
 
-# GUIDE FOR LINUX 
+1. Manually create the directory.
+2. Create the `*.conf` file as root.
 
-```sh
-sudo apt update && sudo apt upgrade -y
-```
+You will need to perform step 2 as root.
 
-```sh
-sudo apt install nginx
-```
+## Guide for Linux
 
-```sh
-sudo cp sample.conf /etc/nginx/conf.d/sample.conf
-```
+1. Update and upgrade the system:
+    ```sh
+    sudo apt update && sudo apt upgrade -y
+    ```
 
-# PS 
-.conf модифицируйте в зависимости, вот примеры модификации:<br>
-1) server_name: вместо localhost, укажите доменное имя сервера. В настройках DNS вашего домена добавьте запись типа A, которая будет связывать доменное имя с IP-адресом вашего сервера.<br>
-2) listen: 80 - HTTP, 443 ssl - HTTPS<br>
-3) Нужно добавить при использовании ssl/tls:<br>
-    ssl_certificate     www.example.com.crt;<br>
-    ssl_certificate_key www.example.com.key;<br>
-    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;<br>
-    ssl_ciphers         HIGH:!aNULL:!MD5;<br><br>
-   Можно добавить для оптимизации(перед 'server'):<br>
-    ssl_session_cache   shared:SSL:10m;<br>
-    ssl_session_timeout 10m;<br>
+2. Install nginx:
+    ```sh
+    sudo apt install nginx
+    ```
+
+3. Copy the sample configuration file:
+    ```sh
+    sudo cp sample.conf /etc/nginx/conf.d/sample.conf
+    ```
+
+## PS
+
+Modify the `*.conf` file as needed. Here are some examples:
+
+1. **server_name**: Replace `localhost` with your server's domain name. In your domain's DNS settings, add an A record linking the domain name to your server's IP address.
+2. **listen**: Use `80` for HTTP, `443 ssl` for HTTPS.
+3. **SSL/TLS**: Add the following for SSL/TLS:
+    ```nginx
+    ssl_certificate     www.example.com.crt;
+    ssl_certificate_key www.example.com.key;
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ```
+
+   For optimization (before `server`):
+    ```nginx
+    ssl_session_cache   shared:SSL:10m;
+    ssl_session_timeout 10m;
+    ```
