@@ -1,4 +1,3 @@
-/* Общие стили для body */
 body {
     background-color: #222;
     color: #fff;
@@ -10,7 +9,6 @@ body {
     margin: 0;
 }
 
-/* Блок чата */
 .chat {
     padding: 20px;
     width: 70vw;
@@ -22,7 +20,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Контейнер с сообщениями и инпутом */
 .chat__container {
     width: 100%;
     height: 100%;
@@ -33,33 +30,28 @@ body {
     border: 1px solid #444;
 }
 
-/* Область сообщений */
 .chat__messages {
     padding: 10px;
     height: 70vh;
     overflow-y: scroll;
 }
 
-/* Сообщение (пользовательское и бот) */
 .chat__message {
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 10px;
 }
 
-/* Сообщение от пользователя */
 .chat__message--user {
     background-color: #444;
     text-align: right;
 }
 
-/* Сообщение от бота */
 .chat__message--bot {
     background-color: #555;
     text-align: left;
 }
 
-/* Выделенные стили для текста сообщений (например, цвет) */
 .chat__message--user-text {
     color: chartreuse;
     text-align: right;
@@ -72,14 +64,12 @@ body {
     margin-bottom: -1vh;
 }
 
-/* Инпут и кнопка для отправки сообщений */
 .chat__input-wrapper {
     padding: 10px;
     display: flex;
     align-items: center;
 }
 
-/* Поле ввода */
 .chat__input {
     flex-grow: 1;
     padding: 10px;
@@ -88,7 +78,6 @@ body {
     margin-right: 10px;
 }
 
-/* Кнопка отправки */
 .chat__button {
     background-color: #555;
     color: #fff;
