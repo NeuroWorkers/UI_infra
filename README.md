@@ -54,33 +54,17 @@ server <br>
 
 # GUIDE FOR LINUX 
 
-1) sudo apt update 
+```sh
+sudo apt update && sudo apt upgrade -y
+```
 
-2) sudo apt install nginx 
+```sh
+sudo apt install nginx
+```
 
-3) sudo nano /etc/nginx/conf.d/YOUR_NAMING.conf
-
-4) Содержимое *.conf:<br>
-server <br>
-{<br>
-   listen 80; # Выберите сами<br>
-   
-   server_name localhost; # Выберите сами<br>
-   
-   root /absolute_path_to_project;<br>
-
-   // Доступ к файлам статики (HTML, CSS, JS)<br>
-   location /static/ {<br>
-       alias /absolute_path_to_static/;<br>
-   }<br>
-
-   location / {<br>
-       proxy_pass http://127.0.0.1:5000; # Выберите сами<br>
-       proxy_set_header Host $host;<br>
-       proxy_set_header X-Real-IP $remote_addr;<br>
-       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>
-   }<br>
-}<br>
+```sh
+sudo cp sample.conf /etc/nginx/conf.d/sample.conf
+```
 
 # PS 
 .conf модифицируйте в зависимости, вот примеры модификации:<br>
